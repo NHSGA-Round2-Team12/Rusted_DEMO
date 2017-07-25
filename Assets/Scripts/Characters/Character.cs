@@ -26,15 +26,23 @@ public class Character : MonoBehaviour {
 	[Header("Type")]
 	public Character_Type charType;
 
+	[Header("References")]
+	public GameObject damageEffect;
+	public GameObject deathEffect;
+
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 		curHitpoints = maxHitpoints;
 	}
 
 	// Does damage to character
 	public void TakeDamage(int dmg){
 		curHitpoints -= dmg;
-		print ("Took " + dmg + " damage!");
+		if (damageEffect != null) {
+			GameObject particles = Instantiate (damageEffect, transform.position, transform.rotation);
+			Destroy (particles, particles.GetComponent<ParticleSystem> ().duration);
+		}
+		//print ("Took " + dmg + " damage!");
 		if (curHitpoints <= 0) {
 			OnDeath ();
 		}
@@ -42,6 +50,10 @@ public class Character : MonoBehaviour {
 
 	// Destroy the character and do particle effects, etc
 	public void OnDeath() {
+		if (deathEffect != null) {
+			GameObject particles = Instantiate (deathEffect, transform.position, transform.rotation);
+			Destroy (particles, particles.GetComponent<ParticleSystem> ().duration);
+		}
 		Destroy (gameObject);
 	}
 }

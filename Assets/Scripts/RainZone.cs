@@ -36,7 +36,9 @@ public class RainZone : MonoBehaviour {
 		foreach (Collider2D col in cols) {
 			if (col == null)
 				continue;
-			Character character = col.GetComponent<Character> ();
+			
+			Player character = col.GetComponent<Player> ();
+			
 			if (character != null && character.charType == Character.Character_Type.Bot) {
 				character.TakeDamage (damage);
 			}
