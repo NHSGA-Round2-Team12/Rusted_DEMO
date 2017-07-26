@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterMovement))]
 public class PlayerMovementInput : MonoBehaviour
 {
-	private PlayerMovement m_Character;
+	private CharacterMovement m_Character;
 	private bool m_Jump;
 
 
 	private void Awake()
 	{
-		m_Character = GetComponent<PlayerMovement>();
+		m_Character = GetComponent<CharacterMovement>();
 	}
 
 
@@ -20,6 +21,8 @@ public class PlayerMovementInput : MonoBehaviour
 		{
 			// Read the jump input in Update so button presses aren't missed.
 			m_Jump = Input.GetButtonDown("Jump");
+			//if (m_Jump == true)
+			//	print ("jump!");
 		}
 	}
 
@@ -30,6 +33,8 @@ public class PlayerMovementInput : MonoBehaviour
 		bool crouch = Input.GetKey(KeyCode.LeftControl);
 		float h = Input.GetAxis("Horizontal");
 		// Pass all parameters to the character control script.
+		if (m_Jump == true)
+			print ("jump!");
 		m_Character.Move(h, crouch, m_Jump);
 		m_Jump = false;
 	}

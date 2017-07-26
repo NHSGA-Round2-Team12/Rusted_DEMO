@@ -38,9 +38,13 @@ public class RainZone : MonoBehaviour {
 				continue;
 			
 			Player character = col.GetComponent<Player> ();
-			
+			// If the player is in zone
 			if (character != null && character.charType == Character.Character_Type.Bot) {
-				character.TakeDamage (damage);
+				// Raycast from the top to the player
+				//Ray ray = new Ray (new Vector2(character.transform.position.x, transform.position.y + transform.lossyScale.y * 0.5f), -character.transform.up);
+				RaycastHit2D raycastHit = Physics2D.Raycast (new Vector2(character.transform.position.x, transform.position.y + transform.lossyScale.y * 0.5f), -transform.up);
+				if (raycastHit != null && raycastHit.collider == col)
+					character.TakeDamage (damage);
 			}
 		}
 

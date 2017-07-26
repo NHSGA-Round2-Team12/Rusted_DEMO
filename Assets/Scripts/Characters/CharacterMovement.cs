@@ -3,41 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerMovement : MonoBehaviour {
-
-	/*
-	[Header("Variables")]
-	public float moveSpeed;
-	public float jumpStrength;
-	public string moveAxis;
-	public string jumpInput;
-
-	private float _moveValue;
-	private bool _jumpPressed;
-	private Rigidbody2D _rb;
-
-
-	// Use this for initialization
-	void Start () {
-		_rb = GetComponent<Rigidbody2D> ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		_moveValue = Input.GetAxis (moveAxis);
-		_jumpPressed = Input.GetButtonDown (jumpInput);
-
-		if (Mathf.Abs(_moveValue) > 0.1)
-			Move ();
-	}
-
-	void Move() {
-		
-		Vector3 movement = transform.right * _moveValue * moveSpeed * Time.deltaTime;
-		//_rb.MovePosition(transform.position + movement);
-		transform.position += movement;
-	}
-	*/
+public class CharacterMovement : MonoBehaviour {
 
 	[SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
 	[SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
@@ -124,7 +90,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 		}
 		// If the player should jump...
-		if (m_Grounded && jump && m_Anim.GetBool("Ground"))
+		if (m_Grounded && jump ) // && m_Anim.GetBool("Ground")
 		{
 			// Add a vertical force to the player.
 			m_Grounded = false;

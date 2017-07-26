@@ -39,7 +39,7 @@ public class Character : MonoBehaviour {
 	public void TakeDamage(int dmg){
 		curHitpoints -= dmg;
 		if (damageEffect != null) {
-			GameObject particles = Instantiate (damageEffect, transform.position, transform.rotation);
+			GameObject particles = Instantiate (damageEffect, transform.position + damageEffect.transform.position, damageEffect.transform.rotation);
 			Destroy (particles, particles.GetComponent<ParticleSystem> ().duration);
 		}
 		//print ("Took " + dmg + " damage!");
@@ -51,7 +51,7 @@ public class Character : MonoBehaviour {
 	// Destroy the character and do particle effects, etc
 	public void OnDeath() {
 		if (deathEffect != null) {
-			GameObject particles = Instantiate (deathEffect, transform.position, transform.rotation);
+			GameObject particles = Instantiate (deathEffect, transform.position + damageEffect.transform.position, damageEffect.transform.rotation);
 			Destroy (particles, particles.GetComponent<ParticleSystem> ().duration);
 		}
 		Destroy (gameObject);
